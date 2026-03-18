@@ -28,7 +28,7 @@ seeds:
   jaffle_shop:
     +schema: raw
     jaffle-data:
-      +enabled: "{{ var('load_source_data', false) }}"
+      +enabled: "{{ var('load_source_data', true) }}"
 
 models:
   jaffle_shop:
@@ -36,3 +36,8 @@ models:
       +materialized: view
     marts:
       +materialized: table
+
+vars:
+  openmetadata_jwt_token: 'eyJraWQiOiJHYjM4OWEtOWY3Ni1nZGpzLWE5MmotMDI0MmJrOTQzNTYiLCJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJvcGVuLW1ldGFkYXRhLm9yZyIsInN1YiI6ImFkbWluIiwicm9sZXMiOlsiQWRtaW4iXSwiZW1haWwiOiJhZG1pbkBvcGVuLW1ldGFkYXRhLm9yZyIsImlzQm90IjpmYWxzZSwidG9rZW5UeXBlIjoiT01fVVNFUiIsInVzZXJuYW1lIjoiYWRtaW4iLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTc3Mzg1NjgwMywiZXhwIjoxNzczODYwNDAzfQ.eYFsZomF7i928NX-0gtzjsQdnqzZEkcu742JyTomvaRZ6Qmqz78WBYpLXzi-2G21d4Yj9-2nAfyNVcPzWJrPKcb6fUI20H6d4HHzANl-8TN_M0GKkr-evZWsVN94MNbfpAG7uvLkQcTtSaziIr__vxK3U5xeQ5c8Azv_522VQ_qWXIaW6ZotSXDi4DFEPgiNkMpp30aLH1sYBRl5KrINuZBPttJdy1DcP9vf814-SAdQnmY7t3fQca8bj0rdo2BE9uGr9Zo3y5BE2HG2QhV7WmdWVw9yJWZyDhboN9XM-qrs3RWjvMu_nsggQ5ldyqgV748jIGsX3pZv7Jl37IRmZA'
+  openmetadata_host_port: 'http://localhost:8585/api'
+  openmetadata_service_name: 'local_postgres_dbt'

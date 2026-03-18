@@ -142,23 +142,20 @@ Run:
 curl -X POST "http://localhost:8585/api/v1/auth/login" \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@open-metadata.org","password":"YWRtaW4="}'
-
 ```
 Copy:
 
 ```json
-"accessToken": "..."
+"accessToken": "eyJraWQ..."
 ```
 
-Paste into YAML session:
+Paste into `dbt_project,yml` in session:
 
 ```yaml
-config:
-    api_endpoint: http://localhost:8585/api
-    auth_provider_type: openmetadata
-    security_config:
-      # Refresh this one before running (intructions in README.md)
-      jwtToken: <PASTE HERE>
+vars:
+nmetadata_jwt_token: <PASTE TOKEN HERE>
+  openmetadata_host_port: 'http://localhost:8585/api'
+  openmetadata_service_name: 'local_postgres_dbt'
 ```
 ---
 
@@ -166,41 +163,9 @@ config:
 In dbt folder:
 
 ```bash
-metadata ingest -c openmetadata-ingestion.yml
+cd dbt
+metadata ingest-dbt
 ```
-
----
-
-# 7) (Optional but recommended) Ingest DuckDB metadata
-
-Create `duckdb_ingestion.yaml`:
-
-```yaml
-source:
-  type: duckdb
-  serviceName: duckdb_local
-  sourceConfig:
-    config:
-      databaseFilterPattern:
-        includes:
-          - "*"
-
-sink:
-  type: metadata-rest
-  config:
-    api_endpoint: http://localhost:8585/api
-    auth_provider_type: openmetadata
-    security_config:
-      jwtToken: "YOUR_TOKEN"
-```
-
-Run:
-
-```bash
-metadata ingest -c duckdb_ingestion.yaml
-```
-
----
 
 # 8) What you’ll see in OpenMetadata UI
 

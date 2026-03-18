@@ -1,5 +1,9 @@
 models:
   - name: customers
+    meta:
+      owner: Thomaz Moreira
+      team: Jaffle Shop
+      domain: Jaffle Shop
     description: Customer overview data mart, offering key details for each unique customer. One row per customer.
     data_tests:
       - dbt_utils.expression_is_true:

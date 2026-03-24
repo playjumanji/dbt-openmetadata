@@ -17,3 +17,5 @@ __pycache__
 
 jaffle_shop.duckdb
 dbt_test_results.duckdb
+
+TODO

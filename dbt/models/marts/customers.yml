@@ -18,6 +18,7 @@ models:
         data_tests:
           - not_null
           - unique
+          - dbt_expectations.expect_column_to_exist
       - name: customer_name
         data_type: text
         description: Customers' full name.

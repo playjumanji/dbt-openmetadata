@@ -8,4 +8,7 @@ packages:
   - git: https://github.com/dbt-labs/dbt-audit-helper.git
     name: audit_helper
     revision: 3bd0ca4e9d79b7d740ad7e77384b3d03a16cf242
-sha1_hash: 171c3fa545f8b4d5f61a4db225ecea560eac8932
+  - name: dbt_expectations
+    package: metaplane/dbt_expectations
+    version: 0.10.10
+sha1_hash: 470eb3c979c3fab0989d400303ac5943467fa268

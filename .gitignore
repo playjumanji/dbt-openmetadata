@@ -19,3 +19,6 @@ jaffle_shop.duckdb
 dbt_test_results.duckdb
 
 TODO
+
+infra_setup/postgres_data/
+.vscode/

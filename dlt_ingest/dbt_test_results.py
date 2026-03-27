@@ -3,6 +3,7 @@ import dlt
 import json
 from pathlib import Path
 from typing import Any, Iterator
+from dbt_artifacts_parser.parser import parse_run_results_v6
 
 # Load .env file
 load_dotenv()
@@ -22,35 +23,14 @@ def load_dbt_test_results(run_results_path: str = "../../dbt/target/run_results.
     with open(file_path, "r") as f:
         data = json.load(f)
     
-    # Extract metadata
-    metadata = {
-        "generated_at": data.get("metadata", {}).get("generated_at"),
-        "invocation_id": data.get("metadata", {}).get("elapsed_time"),
-        "invocation_started_at": data.get("metadata", {}).get("invocation_started_at"),
-        "dbt_version": data.get("metadata", {}).get("dbt_version"),
-        "dbt_schema_version": data.get("metadata", {}).get("schema_version"),
-        "elapsed_time":  data.get("elapsed_time"),
+    run_results = parse_run_results_v6(run_results=data)
 
-    }
-    
     # Process each test result
-    for result in data.get("results", []):
-        record = {
-            # Test metadata
-            "unique_id": result.get("unique_id"),
-            "status": result.get("status"),
-            "execution_time": result.get("execution_time"),
-            "thread_id": result.get("thread_id"),
-            "compiled": result.get("compiled"),
-            "compiled_code": result.get("compiled_code"),
-            "message": result.get("message"),
-            "failures": result.get("failures"),
-            "relation_name": result.get("relation_name"),
-            "batch_results": result.get("batch_results"),
-
-            # Pipeline metadata
-            **metadata,
-        }
+    for result in run_results.results:
+        record = result.model_dump()
+        record.pop("timing")
+        record.pop("adapter_response")
+        record.update(run_results.metadata.model_dump())
         
         yield record
 
@@ -62,10 +42,8 @@ def create_pipeline() -> dlt.Pipeline:
     pipeline = dlt.pipeline(
         pipeline_name="dbt_test_results",
         destination="duckdb",
-        dataset_name="dq",
-        
+        dataset_name="dq",  
     )
-    
     return pipeline
 
 

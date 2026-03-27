@@ -634,6 +634,18 @@ wheels = [
 ]
 
 [[package]]
+name = "dbt-artifacts-parser"
+version = "0.13.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/bd/c7/eddc2d1fec934d1919a997c99ba78dcd006946871fe7cd567cf6d13d62ea/dbt_artifacts_parser-0.13.0.tar.gz", hash = "sha256:55498e8bd0d9064d56617f9c714ced8607d94ccb61e70d4b49dcfd8a28a030d8", size = 261281, upload-time = "2026-03-12T06:04:50.649Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6a/a0/6f7911b3d8c664683a7a2c76402a45c921b1f4d0664c7b75248c6ae2157d/dbt_artifacts_parser-0.13.0-py3-none-any.whl", hash = "sha256:304f2b857650566fed4ed8b976ed3582332eda3cedfe7167158dbbcfced3fe47", size = 250271, upload-time = "2026-03-12T06:04:52.085Z" },
+]
+
+[[package]]
 name = "dbt-common"
 version = "1.37.3"
 source = { registry = "https://pypi.org/simple" }
@@ -719,6 +731,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "cachetools" },
+    { name = "dbt-artifacts-parser" },
     { name = "dbt-postgres" },
     { name = "dlt", extra = ["duckdb", "workspace"] },
     { name = "jafgen" },
@@ -731,6 +744,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "cachetools", specifier = ">=7.0.5" },
+    { name = "dbt-artifacts-parser", specifier = ">=0.13.0" },
     { name = "dbt-postgres", specifier = ">=1.10.0" },
     { name = "dlt", extras = ["duckdb", "workspace"], specifier = ">=1.24.0" },
     { name = "jafgen", specifier = ">=0.4.14" },

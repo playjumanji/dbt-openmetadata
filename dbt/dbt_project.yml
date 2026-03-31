@@ -30,9 +30,15 @@ seeds:
 models:
   jaffle_shop:
     staging:
+      +schema: staging
       +materialized: view
     marts:
+      +schema: marts
       +materialized: table
+
+data_tests:
+  +store_failures: true
+  +schema: dqs
 
 vars:
   "dbt_date:time_zone": "America/Los_Angeles"
